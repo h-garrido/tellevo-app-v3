@@ -1,0 +1,7 @@
+{
+  "name": "tellevo-app-v3",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

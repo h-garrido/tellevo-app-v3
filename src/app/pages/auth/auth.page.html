@@ -1,0 +1,46 @@
+<ion-content>
+  <app-header></app-header>
+  <app-logo></app-logo>
+
+  <h2 class="ion-text-center ion-no-margin">Log in</h2>
+
+  <div class="content">
+    <div class="d-flex-center">
+      <form (keyup.enter)="submit()" (ngSubmit)="submit()" class="ion-text-center">
+  
+        <app-custom-input autocomplete="email" [control]="form.controls.email" type="email" label="Correo electrónico" icon="mail-outline"></app-custom-input>
+  
+        <div class="validators" *ngIf="form.controls.email.errors && form.controls.email.dirty">
+            <div *ngIf="form.controls.email.errors?.['required']">Ingresa tu e-mail</div>
+            <div *ngIf="form.controls.email.errors?.['email']">Ingresa un e-mail válido</div>
+        </div>
+  
+        <app-custom-input [control]="form.controls.password" type="password" label="Contraseña" icon="lock-closed-outline"></app-custom-input>
+        <div class="validators" *ngIf="form.controls.password.errors && form.controls.password.dirty">
+          <div *ngIf="form.controls.password.errors?.['required']">Ingresa tu contraseña</div>
+          
+      </div>
+  
+      <ion-button class="ion-margin-vertical" [disabled]="form.invalid" type="submit" shape="round">
+        Acceder
+        <ion-icon slot="end" name="log-in-outline"></ion-icon>
+      </ion-button>
+
+      <div class="sign-up">
+        <div>¿No tienes cuenta?</div>
+        <ion-button routerLink="sign-up" class="ion-margin-vertical" shape="round">
+          Regístrate
+          <ion-icon slot="end" name="person-add-outline"></ion-icon>
+        </ion-button>
+      </div>
+    
+      </form>
+
+    </div>
+
+
+  </div>
+
+
+
+</ion-content>

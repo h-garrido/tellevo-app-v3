@@ -1,0 +1,19 @@
+miubicacion {
+    position: fixed;
+    bottom: 0px;
+    background: var(--ion-color-warning);
+}
+
+.map {
+    height: 100%;
+    width: 100%;
+    display: block;
+    top: 0px;
+    left: 0px;    
+}
+
+.search {
+    position: fixed;
+    top: 45px;
+    left: 0px;
+}

@@ -6,24 +6,18 @@ import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './components/header/header.component';
 import { CustomInputComponent } from './components/custom-input/custom-input.component';
 import { LogoComponent } from './components/logo/logo.component';
-
+import { GooglemapsComponent } from './components/googlemaps/googlemaps.component';
 
 
 @NgModule({
-  declarations: [
-    HeaderComponent,
-    CustomInputComponent,
-  LogoComponent],
-  exports: [
-    HeaderComponent,
-    CustomInputComponent,
-  LogoComponent],
+  declarations: [HeaderComponent, CustomInputComponent, LogoComponent, GooglemapsComponent ],
+  exports: [HeaderComponent, CustomInputComponent, LogoComponent, GooglemapsComponent],
   imports: [
     CommonModule,
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
-  ]
+    RouterModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

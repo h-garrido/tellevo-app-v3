@@ -8,6 +8,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { GooglemapsService } from 'src/app/services/googlemaps.service';
+import { Plugins } from '@capacitor/core';
 import { DOCUMENT } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 import { Geolocation } from '@capacitor/geolocation';
@@ -21,8 +22,8 @@ declare var google: any;
 })
 export class GooglemapsComponent implements OnInit {
   @Input() position = {
-    lat: -41.4657400,
-    lng: -72.9428900,
+    lat: 0,
+    lng: 0,
   };
 
   label = {
@@ -64,7 +65,6 @@ export class GooglemapsComponent implements OnInit {
       zoom: 15,
       disableDefaultUI: false,
       clickeableIcons: false,
-      scrollwheel: false,
     };
 
     this.map = new google.maps.Map(this.divMap.nativeElement, mapOptions);

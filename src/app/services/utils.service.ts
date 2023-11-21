@@ -22,6 +22,15 @@ export class UtilsService {
 
   /* LOADING */
 
+  loading() {
+    return this.loadingController.create({
+      message: 'Cargando...',
+      spinner: 'crescent',
+      showBackdrop: true,
+      cssClass: 'loading',
+    });
+  }
+
   async presentLoading(opts?: LoadingOptions) {
     const loading = await this.loadingController.create(opts);
     await loading.present();

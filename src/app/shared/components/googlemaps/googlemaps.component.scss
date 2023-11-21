@@ -1,19 +1,23 @@
-miubicacion {
-    position: fixed;
-    bottom: 0px;
+.miubicacion {
+    position: absolute;
+    bottom: 20px; /* Adjust this value so that 'Mi Ubicación Actual' clears the Street View button */
+    right: 60px; /* Adjust as needed for spacing from the right edge */
+    z-index: 10; /* Ensure it's above the map controls */
     background: var(--ion-color-warning);
 }
+
 
 .map {
     height: 100%;
     width: 100%;
-    display: block;
-    top: 0px;
-    left: 0px;    
 }
 
-.search {
-    position: fixed;
-    top: 45px;
-    left: 0px;
+
+ion-content {
+    --background: var(--ion-color-primary);
+    --color: var(--ion-color-primary-contraste);
+    --padding-start: 0;
+    --padding-end: 0;
+    --padding-top: 0;
+    --padding-bottom: 0;
 }

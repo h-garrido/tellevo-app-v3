@@ -1,0 +1,72 @@
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes zoomIn {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .bienvenida-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    animation: fadeIn 1s forwards, fadeOut 1s 3s forwards;
+  }
+  
+  .logo {
+    width: 50%;
+    animation: zoomIn 2s infinite;
+    object-fit: contain;
+  }
+  
+  .welcome-text {
+    font-size: 24px;
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .spinner-container {
+    display: none; 
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    z-index: 10;
+  }
+  
+  .spinner-container ion-spinner {
+    width: 50px;
+    height: 50px;
+  }
+
+  ion-content {
+    --background: transparent;
+  }

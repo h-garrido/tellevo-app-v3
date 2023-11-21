@@ -11,7 +11,7 @@ import { GooglemapsComponent } from './components/googlemaps/googlemaps.componen
 
 @NgModule({
   declarations: [HeaderComponent, CustomInputComponent, LogoComponent, GooglemapsComponent ],
-  exports: [HeaderComponent, CustomInputComponent, LogoComponent, GooglemapsComponent],
+  exports: [HeaderComponent, CustomInputComponent, LogoComponent, GooglemapsComponent, ReactiveFormsModule],
   imports: [
     CommonModule,
     IonicModule,

@@ -20,6 +20,10 @@
           <div *ngIf="form.controls.password.errors?.['required']">Ingresa tu contraseña</div>
           
       </div>
+
+      <div class="ion-text-right">
+        <ion-button fill="clear" size="small" routerLink="forgot-password"> Recupera tu contraseña </ion-button>
+      </div>
   
       <ion-button class="ion-margin-vertical" [disabled]="form.invalid" type="submit" shape="round">
         Acceder

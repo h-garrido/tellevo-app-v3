@@ -21,3 +21,27 @@ ion-content {
     --padding-top: 0;
     --padding-bottom: 0;
 }
+
+.content-inside-map {
+    p {
+      margin-bottom: 0;
+      &:first-child {
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+    }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      button {
+        background-color: #007bff; /* Color de fondo para botón */
+        color: white; /* Color del texto */
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+    }
+  }

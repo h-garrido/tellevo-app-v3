@@ -11,6 +11,7 @@ import { GooglemapsService } from 'src/app/services/googlemaps.service';
 import { DOCUMENT } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 import { Geolocation } from '@capacitor/geolocation';
+import { UtilsService } from 'src/app/services/utils.service';
 
 declare var google: any;
 
@@ -21,8 +22,8 @@ declare var google: any;
 })
 export class GooglemapsComponent implements OnInit {
   @Input() position = {
-    lat: -41.4657400,
-    lng: -72.9428900,
+    lat: -41.46574,
+    lng: -72.94289,
   };
 
   label = {
@@ -40,22 +41,35 @@ export class GooglemapsComponent implements OnInit {
     private renderer: Renderer2,
     @Inject(DOCUMENT) private document,
     private googlemapsSvc: GooglemapsService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private utilsSvc: UtilsService
   ) {}
 
   ngOnInit(): void {
-    this.init();
+    this.checkPermissions().then(() => {
+      this.init();
+    });
+  }
+
+  async checkPermissions() {
+    const hasPermission = await Geolocation.checkPermissions();
+    if (hasPermission.location !== 'granted') {
+      await Geolocation.requestPermissions();
+    }
   }
 
   async init() {
-    this.googlemapsSvc.init(this.renderer, this.document).then(() => {
-      this.initMap();
-    }).catch((error) => {
-      console.log(error);
-    });    
+    this.googlemapsSvc
+      .init(this.renderer, this.document)
+      .then(() => {
+        this.initMap();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
-  initMap(){
+  initMap() {
     const position = this.position;
     let latlng = new google.maps.LatLng(position.lat, position.lng);
 
@@ -74,7 +88,7 @@ export class GooglemapsComponent implements OnInit {
       draggable: true,
     });
     this.clickHandleEvent();
-    this.infoWindow = new google.maps.infoWindow();
+    this.infoWindow = new google.maps.InfoWindow();
     if (this.label.title.length) {
       this.addMarker(position);
       this.setInfoWindow(this.marker, this.label.title);
@@ -82,14 +96,13 @@ export class GooglemapsComponent implements OnInit {
   }
 
   clickHandleEvent() {
-
     this.map.addListener('click', (event: any) => {
       const position = {
         lat: event.latLng.lat(),
         lng: event.latLng.lng(),
       };
       this.addMarker(position);
-    })
+    });
   }
 
   addMarker(position: any) {
@@ -100,31 +113,38 @@ export class GooglemapsComponent implements OnInit {
   }
 
   setInfoWindow(marker: any, title: string) {
+    const contentString = `
+  <div class="content-inside-map">
+    <p>${title}</p>
+    <p>Latitud: ${this.positionSet.lat}</p>
+    <p>Longitud: ${this.positionSet.lng}</p>
+  </div>`;
 
-    const contentString = '<div id="contentInsideMap">' +
-      '<div>' +
-      '</div>' +
-      '<p style="font-weight: bold; margin-bottom: 5px;"></p>' +
-      '<div id="bodyContent">' + 
-      '</div>' +
-      '</div>';
+
     this.infoWindow.setContent(contentString);
     this.infoWindow.open(this.map, marker);
 
+    
   }
 
   async mylocation() {
-    console.log('mylocation() click')
-
-    Geolocation.getCurrentPosition().then ((res) => {
-      console.log('mylocation() -> get')
-
+    console.log('mylocation() click');
+    try {
+      const res = await Geolocation.getCurrentPosition();
+      console.log('mylocation() -> get');
       const position = {
         lat: res.coords.latitude,
         lng: res.coords.longitude,
-      }
+      };
       this.addMarker(position);
-    })
+    } catch (error) {
+      console.error('Error getting location', error);
+      this.utilsSvc.presentAlert({
+        header: 'Error',
+        message: 'No se pudo obtener la ubicación',
+        buttons: ['OK'],
+        mode: 'ios',
+      });
+    }
   }
-
 }

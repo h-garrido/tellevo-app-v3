@@ -12,6 +12,7 @@ import { DOCUMENT } from '@angular/common';
 import { ModalController } from '@ionic/angular';
 import { Geolocation } from '@capacitor/geolocation';
 import { UtilsService } from 'src/app/services/utils.service';
+import { GeolocationService } from 'src/app/services/geolocation.service';
 
 declare var google: any;
 
@@ -42,7 +43,8 @@ export class GooglemapsComponent implements OnInit {
     @Inject(DOCUMENT) private document,
     private googlemapsSvc: GooglemapsService,
     private modalController: ModalController,
-    private utilsSvc: UtilsService
+    private utilsSvc: UtilsService,
+    private geolocationSvc: GeolocationService
   ) {}
 
   ngOnInit(): void {
@@ -102,8 +104,10 @@ export class GooglemapsComponent implements OnInit {
         lng: event.latLng.lng(),
       };
       this.addMarker(position);
+      this.setInfoWindow(this.marker, this.label.title); // Actualiza la ventana de información
     });
   }
+  
 
   addMarker(position: any) {
     let latLng = new google.maps.LatLng(position.lat, position.lng);
@@ -115,7 +119,7 @@ export class GooglemapsComponent implements OnInit {
   setInfoWindow(marker: any, title: string) {
     const contentString = `
   <div class="content-inside-map">
-    <p>${title}</p>
+    <h6>${title}</h6>
     <p>Latitud: ${this.positionSet.lat}</p>
     <p>Longitud: ${this.positionSet.lng}</p>
   </div>`;
@@ -137,6 +141,7 @@ export class GooglemapsComponent implements OnInit {
         lng: res.coords.longitude,
       };
       this.addMarker(position);
+      this.setInfoWindow(this.marker, this.label.title); // Actualiza la ventana de información
     } catch (error) {
       console.error('Error getting location', error);
       this.utilsSvc.presentAlert({
@@ -147,4 +152,56 @@ export class GooglemapsComponent implements OnInit {
       });
     }
   }
+
+  async addCurrentLocationMarker() {
+    const position = await this.geolocationSvc.getCurrentLocation();
+    const marker = new google.maps.Marker({
+      position,
+      map: this.map,
+      title: 'Tu ubicación actual'
+    });
+    this.map.setCenter(position);
+  }
+
+  async getDestinationCoords(destination: string) {
+    const geocoder = new google.maps.Geocoder();
+    const geocoderRequest = {
+      address: destination
+    };
+    const results = await geocoder.geocode(geocoderRequest);
+    return {
+      lat: results[0].geometry.location.lat(),
+      lng: results[0].geometry.location.lng()
+    };
+  }
+
+  async addDestinationMarker(position: any) {
+    const marker = new google.maps.Marker({
+      position,
+      map: this.map,
+      title: 'Destino'
+    });
+  }
+
+  async drawRouteToDestination(destinationPosition: any) {
+    const directionsService = new google.maps.DirectionsService();
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+    directionsRenderer.setMap(this.map);
+    const route = await directionsService.route({
+      origin: this.positionSet,
+      destination: destinationPosition,
+      travelMode: google.maps.TravelMode.DRIVING
+    });
+    directionsRenderer.setDirections(route);
+  }
+
+  async getCurrentLocation() {
+    const coordinates = await Geolocation.getCurrentPosition();
+    return {
+      lat: coordinates.coords.latitude,
+      lng: coordinates.coords.longitude,
+    };
+  }
+
+  
 }

@@ -1,7 +1,11 @@
 <ion-item class="ion-margin-vertical">
   <ion-icon color="primary" *ngIf="icon" slot="start" [name]="icon"></ion-icon>
   <ion-label position="floating">{{label}}</ion-label>
-  <ion-input debounce="500" [autocomplete]="autocomplete" [type]="type" [formControl]="control"></ion-input>
+  <ion-input *ngIf="!isSelect" debounce="500" [autocomplete]="autocomplete" [type]="type" [formControl]="control"></ion-input>
+
+  <ion-select *ngIf="isSelect" [formControl]="control">
+    <ion-select-option *ngFor="let option of options" [value]="option.value">{{ option.label }}</ion-select-option>
+  </ion-select>
 
   <ion-buttons *ngIf="isPassword" slot="end">
     <ion-button (click)="toggleHide()">

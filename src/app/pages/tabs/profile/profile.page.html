@@ -1,10 +1,11 @@
 <ion-content>
-  <app-header title="Perfil"></app-header>
+  <app-header backButton="/tabs/home" title="Perfil"></app-header>
 
 <div class="content ion-text-center">
 
   <ion-icon class="avatar" name="person-circle-outline"></ion-icon>
   <h2>{{user.name}}</h2>
+  <div>({{user.role}})</div>
   <div>{{user.email}}</div>
 
   <ion-button (click)="signOut()"shape="round">

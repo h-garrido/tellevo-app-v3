@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { NoAuthGuard } from './guards/no-auth.guard';
+import { TravelRequestModalComponent } from './shared/components/travel-request-modal/travel-request-modal.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
     path: 'splash-screen',
     loadChildren: () => import('./pages/splash-screen/splash-screen.module').then( m => m.SplashScreenPageModule)
   },
+  {path: 'travel-request', component: TravelRequestModalComponent}
 
 ];
 

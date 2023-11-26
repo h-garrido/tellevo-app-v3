@@ -49,7 +49,7 @@ export class AuthPage implements OnInit {
         (error) => {
           this.utilsSvc.dismissLoading();
           this.utilsSvc.presentToast({
-            message: error,
+            message: 'Error al iniciar sesión',
             duration: 3000,
             color: 'warning',
             icon: 'alert-circle-outline'

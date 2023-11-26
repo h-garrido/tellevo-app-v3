@@ -16,6 +16,7 @@ export class SignUpPage implements OnInit {
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.min(4)]),
     confirmPassword: new FormControl(''),
+    role: new FormControl('', [Validators.required])
   });
 
   constructor(
@@ -50,9 +51,11 @@ export class SignUpPage implements OnInit {
             uid: res.user.uid,
             email: res.user.email,
             name: res.user.displayName,
+            role: this.form.value.role,
           };
 
           this.utilsSvc.setElementLocalStorage('user', user);
+          this.firebaseSvc.saveUserData(user)
           this.utilsSvc.routerLink('/tabs/home');
  
           this.utilsSvc.dismissLoading();

@@ -1,4 +1,9 @@
-<app-header title="Inicio"></app-header>
+<ion-toolbar color="primary">
+  <app-header title="Inicio"></app-header>
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
+</ion-toolbar>
 <ion-content [fullscreen]="false">
 
   <app-googlemaps></app-googlemaps>

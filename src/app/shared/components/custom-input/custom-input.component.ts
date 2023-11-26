@@ -13,14 +13,17 @@ export class CustomInputComponent  implements OnInit {
   @Input() icon: string;
   @Input() type: string;
   @Input() autocomplete: string;
+  @Input() options: { value: string; label: string }[];
 
   isPassword: boolean;
+  isSelect: boolean;
   hide: boolean = true;
 
   constructor() { }
 
   ngOnInit() {
     if (this.type == 'password') this.isPassword = true;
+    if (this.type == 'select') this.isSelect = true;
   }
 
   toggleHide() {

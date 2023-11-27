@@ -28,11 +28,7 @@
 
 ion-content {
     --background: var(--ion-color-primary);
-    --color: var(--ion-color-primary-contraste);
-    --padding-start: 0;
-    --padding-end: 0;
-    --padding-top: 0;
-    --padding-bottom: 0;
+    --color: var(--ion-color-primary-contrast);
     --overflow: hidden;
 }
 
@@ -42,15 +38,14 @@ h1 {
 
 .content {
     width: 100%;
-    height: 100%;
+    height: 90vh;
     background: var(--ion-color-light);
     color: var(--ion-color-light-contrast);
-    margin: 0;
 
 
-    box-shadow: 0px -8px 40px -16px rgba(0, 0, 0, 0.50);
     -webkit-box-shadow: 0px -8px 40px -16px rgba(0, 0, 0, 0.50);
     -moz-box-shadow: 0px -8px 40px -16px rgba(0, 0, 0, 0.50);
+    box-shadow: 0px -8px 40px -16px rgba(0, 0, 0, 0.50);
 }
 
 ion-item {

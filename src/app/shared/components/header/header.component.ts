@@ -17,13 +17,16 @@ export class HeaderComponent implements OnInit {
 
   darkMode: BehaviorSubject<boolean>;
 
-  constructor(private themeSvc: ThemeService) {}
+  constructor(private themeSvc: ThemeService) {
+    this.darkMode = this.themeSvc.darkMode;
+  }
 
   ngOnInit() {
     this.darkMode = this.themeSvc.darkMode;
   }
+  
 
-  toggleDarkMode(darkMode: boolean) {
+  setTheme(darkMode: boolean) {
     this.themeSvc.setTheme(darkMode);
   }
 }

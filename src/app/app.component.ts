@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   menuOptions: any[];
 
   constructor(private themeSvc: ThemeService, private firebaseSvc: FirebaseService, private modalController: ModalController, private router: Router) {
-    this.themeSvc.setInitialTheme();
+    this.themeSvc.setInitialTheme();   
   }
 
   ngOnInit() { 

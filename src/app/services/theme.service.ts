@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class ThemeService {
+  // Esto es un ejemplo si estás utilizando BehaviorSubject
   darkMode = new BehaviorSubject(false);
 
   constructor() {}
@@ -13,19 +14,18 @@ export class ThemeService {
     let darkMode = JSON.parse(localStorage.getItem('darkMode'));
 
     if (darkMode) {
-      this.setTheme(darkMode)
+      document.body.setAttribute('color-theme', 'dark');
     } else {
-      this.setTheme(darkMode)
+      document.body.setAttribute('color-theme', 'light');
     }
   }
 
   setTheme(darkMode: boolean) {
     if (darkMode) {
-      document.body.setAttribute('color-theme', 'dark')
+      document.body.setAttribute('color-theme', 'dark');
     } else {
-      document.body.setAttribute('color-theme', 'light')
+      document.body.setAttribute('color-theme', 'light');
     }
-
     this.darkMode.next(darkMode);
     localStorage.setItem('darkMode', JSON.stringify(darkMode));
   }

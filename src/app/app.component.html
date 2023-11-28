@@ -7,7 +7,15 @@
   <ion-content>
     <ion-list>
       <ion-menu-toggle auto-hide="false" *ngFor="let option of menuOptions">
-        <ion-item [routerLink]="option.url">
+        <ion-item
+          (click)="
+            option.url === '/travel-request'
+              ? presentTravelRequestModal()
+              : false
+          "
+          [routerLink]="option.url !== '/travel-request' ? option.url : null"
+          class="menu-item"
+        >
           <ion-icon slot="start" [name]="option.icon"></ion-icon>
           <ion-label>
             {{ option.title }}
@@ -15,7 +23,6 @@
         </ion-item>
       </ion-menu-toggle>
     </ion-list>
-    
   </ion-content>
 </ion-menu>
 

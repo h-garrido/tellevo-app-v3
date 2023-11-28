@@ -1,3 +1,39 @@
-<p>
-  travel-request-modal works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Solicitud de Viaje</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">Cerrar</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form [formGroup]="travelRequestForm" (ngSubmit)="submitRequest()">
+    
+    <ion-item>
+      <ion-label position="floating">Origen</ion-label>
+      <ion-input formControlName="origin" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Destino</ion-label>
+      <ion-input formControlName="destination" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Hora de Salida</ion-label>
+      <ion-time
+        formControlName="departureTime"
+        display-format="h:mm A"
+        picker-format="h:mm A"
+      ></ion-time>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Costo por Persona</ion-label>
+      <ion-input formControlName="costPerPerson" type="number"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Costo Máximo</ion-label>
+      <ion-input formControlName="maxCost" type="number"></ion-input>
+    </ion-item>
+    
+    <ion-button shape="round" color="dark" type="submit">Enviar Solicitud</ion-button>
+  </form>
+</ion-content>

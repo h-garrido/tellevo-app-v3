@@ -29,28 +29,28 @@ export class AppComponent implements OnInit {
         });
       }
     });
-    this.router.events.subscribe(event => {
+    /* this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         if (event.urlAfterRedirects === 'travel-request') {
           this.presentTravelRequestModal();
         }
       }
-    });
+    }); */
   }
 
   setupMenuOptions() {
     if (this.user?.role === 'Conductor') {
       this.menuOptions = [
         // Opciones del menú para conductores
-        { title: 'Mis Viajes', url: '/mis-viajes', icon: 'car' },
-        { title: 'Solicitudes de Viaje', url: '/solicitudes-viaje', icon: 'car' },
-        { title: 'Vehículos', url: '/vehiculos', icon: 'car' }       
+        { title: 'Mis Viajes', url: '/mis-viajes', icon: 'list-outline' },
+        { title: 'Solicitudes de Viaje', url: '/solicitudes-viaje', icon: 'alert-outline' },
+        { title: 'Vehículos', url: '/vehiculos', icon: 'car-sport-outline' }       
       ];
     } else {
       this.menuOptions = [
         // Opciones del menú para pasajeros
-        { title: 'Solicitar Viaje', url: '/travel-request', icon: 'search' },
-        { title: 'Mis Viajes', url: '/mis-viajes', icon: 'car' }
+        { title: 'Solicitar Viaje', url: '/travel-request', icon: 'location-outline' },
+        { title: 'Mis Viajes', url: '/mis-viajes', icon: 'list-outline' }
       ];
     }
   }
@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
   async presentTravelRequestModal() {
     const modal = await this.modalController.create({
       component: TravelRequestModalComponent,
-      // Aquí puedes pasar datos al modal si es necesario
+     
     });
     return await modal.present();
   }

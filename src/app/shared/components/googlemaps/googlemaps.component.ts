@@ -120,6 +120,8 @@ export class GooglemapsComponent implements OnInit {
     const contentString = `
   <div class="content-inside-map">
     <h6>${title}</h6>
+    <p>Arrastra el marcador para actualizar la ubicación</p>
+    <p>Ubicación actual:</p>
     <p>Latitud: ${this.positionSet.lat}</p>
     <p>Longitud: ${this.positionSet.lng}</p>
   </div>`;

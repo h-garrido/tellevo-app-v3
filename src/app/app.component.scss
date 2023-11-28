@@ -1,0 +1,11 @@
+  
+  .menu-item {
+    &:hover, &:active {
+      --background: #f4f4f4; // Color de fondo al interactuar
+    }
+  
+    ion-icon {
+      --color: var(--ion-color-primary);
+    }
+  }
+  
